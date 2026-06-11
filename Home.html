@@ -3,149 +3,588 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PayPal Clone</title>
-  <!-- You can use a local stylesheet or link to an external one -->
-  <link rel="stylesheet" href="style.css">
-  <!-- (Optional) Icon library like Font Awesome for icons -->
+  <title>PayPal Home</title>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      color: #000;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 420px;
+      min-height: 100vh;
+      margin: 0 auto;
+      background: #fff;
+      position: relative;
+      padding-bottom: 86px;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .top-header {
+      height: 58px;
+      padding: 0 27px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-icon,
+    .header-icons i {
+      font-size: 17px;
+      color: #0067ff;
+      cursor: pointer;
+    }
+
+    .header-icons {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* Balance Label */
+    .balance-label-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 28px 0;
+    }
+
+    .paypal-small-icon {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #0067ff;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0067ff;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .balance-label-row span {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .balance-amount {
+      padding: 61px 26px 0;
+      font-size: 31px;
+      font-weight: 800;
+      letter-spacing: -1.1px;
+    }
+
+    /* Add Money Card */
+    .add-money-card {
+      margin: 20px 13px 0;
+      height: 77px;
+      background: #0b56e8;
+      border-radius: 0 0 9px 9px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 13px 0 16px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .add-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .add-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 7px;
+      background: #0864ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .money-icon {
+      width: 22px;
+      height: 13px;
+      border: 1.8px solid #fff;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7px;
+      font-weight: bold;
+    }
+
+    .money-icon::before,
+    .money-icon::after {
+      content: "";
+      width: 4px;
+      height: 4px;
+      border: 1.4px solid #fff;
+      position: absolute;
+      border-radius: 50%;
+      top: 3px;
+    }
+
+    .money-icon::before {
+      left: 2px;
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .money-icon::after {
+      right: 2px;
+      border-left: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    .add-text h3 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .add-text p {
+      font-size: 11px;
+      color: #ffffff;
+      opacity: 0.96;
+    }
+
+    .add-arrow {
+      font-size: 22px;
+      color: #fff;
+      padding-right: 1px;
+    }
+
+    /* Recent Activity */
+    .activity-header {
+      padding: 25px 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .activity-header h2 {
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .see-more {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .see-more i {
+      font-size: 10px;
+      color: #333;
+    }
+
+    .activity-list {
+      padding: 23px 33px 0;
+    }
+
+    .activity-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 27px;
+    }
+
+    .activity-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .activity-avatar {
+      width: 46px;
+      height: 46px;
+      background: #050505;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+      text-transform: uppercase;
+    }
+
+    .store-icon-circle {
+      width: 46px;
+      height: 46px;
+      background: #050505;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .store-icon-circle i {
+      font-size: 18px;
+    }
+
+    .tiktok-logo {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: end;
+      gap: 5px;
+      flex-shrink: 0;
+      padding-left: 4px;
+    }
+
+    .bar {
+      width: 7px;
+      border-radius: 1px;
+    }
+
+    .bar1 {
+      height: 25px;
+      background: #336ebc;
+    }
+
+    .bar2 {
+      height: 18px;
+      background: #77b6d7;
+    }
+
+    .bar3 {
+      height: 28px;
+      background: #52c2c7;
+    }
+
+    .activity-text {
+      min-width: 0;
+    }
+
+    .activity-title {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 210px;
+      margin-bottom: 7px;
+    }
+
+    .activity-subtitle {
+      font-size: 11px;
+      color: #555;
+    }
+
+    .activity-date {
+      font-size: 10px;
+      color: #777;
+      margin-top: 3px;
+    }
+
+    .activity-amount {
+      font-size: 12px;
+      white-space: nowrap;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+
+    .positive {
+      color: #008c3a;
+    }
+
+    .negative {
+      color: #000;
+    }
+
+    /* Hide dynamic transaction if no localStorage data */
+    .hidden {
+      display: none;
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      width: 100%;
+      max-width: 420px;
+      height: 55px;
+      background: #fff;
+      border-top: 1px solid #eef1f5;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 100;
+    }
+
+    .nav-item {
+      text-decoration: none;
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      gap: 3px;
+      width: 25%;
+    }
+
+    .nav-item i {
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    .nav-item.active span {
+      font-weight: 800;
+    }
+
+    .send-request-icon {
+      font-size: 20px;
+      line-height: 15px;
+      font-weight: 400;
+    }
+
+    @media (max-width: 360px) {
+      .balance-amount {
+        font-size: 28px;
+      }
+
+      .activity-list {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .activity-title {
+        max-width: 170px;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
-
-
-
-  <!-- Main Container -->
   <div class="app-container">
 
-    <!-- Header with Profile & Balance -->
-    <header>
-        <div class="profile"> 
-          <a href="./profile.html">
-          
-            <img src="alisekh.jpg" alt="Profile Picture" >
-          
-          </a>
-        </div>
-        <div class="scanner">
-            <span><i class="fa-solid fa-qrcode"></i></span>
-        </div>
+    <!-- Top Header -->
+    <header class="top-header">
+      <i class="fa-solid fa-bars menu-icon"></i>
+
+      <div class="header-icons">
+        <i class="fa-regular fa-bell"></i>
+        <i class="fa-regular fa-user"></i>
+      </div>
     </header>
-    <div class="balance-card">
-        <div class="flex1">
-            <img  id="icon1" src="paypal.svg">
-        </div>
-        <div class="flex2">
-        <p class="balance-amount">  230,635,486,000 USD</p>
-        <p class="balance-label" >PayPal balance</p>
+
+    <!-- Balance Label -->
+    <div class="balance-label-row">
+      <div class="paypal-small-icon">P</div>
+      <span>PayPal balance</span>
     </div>
+
+    <!-- Balance Amount -->
+    <h1 class="balance-amount">USD 40.49</h1>
+
+    <!-- Add Money Card -->
+    <a href="sendMoney.html" class="add-money-card">
+      <div class="add-left">
+        <div class="add-icon-box">
+          <div class="money-icon">$</div>
+        </div>
+
+        <div class="add-text">
+          <h3>Add money</h3>
+          <p>Spend it online or in shops</p>
+        </div>
       </div>
 
-    <!-- Send Again Section -->
-    <section class="section send-again">
-      <h2>Send again</h2>
-      <div class="contacts">
-        <div class="contact">
-          <img src="image1.jpg" alt="User 1" />
-          <p>Annna</p>
-        </div>
-        <div class="contact">
-          <img src="image2.jpg" alt="User 2" />
-          <p> flexam </p>
-        </div>
-        <div class="contact">
-          <img src="chrristean .jpg" alt="User 3" />
-          <p>Chrristean</p>
-        </div>
-        <div class="contact">
-          <div class="contact-initials">LT</div>
-          <p>thomasbrad_6</p>
-        </div>
-        <div class="contact">
-          <div class="contact-initials">AO</div>
-          <p>Albert_ontario</p>
-        </div>
-      </div>
-    </section>
+      <i class="fa-solid fa-chevron-right add-arrow"></i>
+    </a>
 
-    <!-- Send Money Internationally Section -->
-    <section class="section send-internationally">
-      <h2>Send money internationally</h2>
-      <div class="international-options">
-        <div class="transaction-container">
-        <div class="transction-method1"><button><i class="fas fa-university" id="icccon"></i> </button><div class="tranText">Direct to bank</div></div>
-        <div class="transction-method1"><button><i class="fas fa-hand-holding-usd" id="icccon"></i> </button><div class="tranText">Cash pickup</div></div>
-        <div class="transction-method1"><button><i class="fas fa-mobile-alt" id="icccon"></i> </button><div class="tranText">Mobile money</div></div>
-        <div class="transction-method1"><button><i class="fas fa-phone" id="icccon"></i> </button><div class="tranText">Reload phones</div></div>
-
+    <!-- Recent Activity Header -->
+    <div class="activity-header">
+      <h2>Recent activity</h2>
+      <a href="transaction.html" class="see-more">
+        See more <i class="fa-solid fa-chevron-right"></i>
+      </a>
     </div>
-      </div>
-    </section>
 
-    <!-- Transactions Section -->
-        <section class="section transactions">
-         <a class="link1" href="transaction.html">
-          <div class="transaction">
-            <div class="transaction-info">
-              <p class="transaction-title" id="recipientName">harry  brook</p>
-              <p class="transaction-date" id="timestamp">22 Feb</p>
-              <p class="transaction-type" >Payment</p>
-              
-            </div>
-            <p class="transaction-amount negative" id="feeText">-US$200</p>
-          </div>   </a>
+    <!-- Recent Activity List -->
+    <section class="activity-list">
 
-          <div class="transaction">
-            <div class="transaction-info">
-              <p class="transaction-title">TikTok Inc.</p>
-              <p class="transaction-date">22 Feb</p>
-              <p class="transaction-type">Payment</p>
+      <!-- Dynamic old money sending transaction -->
+      <a href="transaction.html" class="activity-link hidden" id="dynamicTransaction">
+        <div class="activity-item">
+          <div class="activity-left">
+            <div class="activity-avatar" id="recipientAvatar">HB</div>
+
+            <div class="activity-text">
+              <p class="activity-title" id="recipientName">harry brook</p>
+              <p class="activity-subtitle">Payment</p>
+              <p class="activity-date" id="timestamp">22 Feb</p>
             </div>
-            <div class="transaction-amount negative">-US$41.20</div>
           </div>
-        </section>
 
+          <p class="activity-amount negative" id="feeText">-US$200</p>
+        </div>
+      </a>
 
-     <!-- Bottom Action Bar (Send / Request) -->
-     <a href="sendMoney.html" class="send-btn">  <div class="bottom-action-bar">
-    <button>Send</button>
-    <button class="request-btn">Request</button>
-     </div></a>
+      <!-- Default old static transaction -->
+      <a href="transaction.html" class="activity-link">
+        <div class="activity-item">
+          <div class="activity-left">
+            <div class="activity-avatar">HB</div>
 
-  <!-- Bottom Navigation Bar -->
-  <nav class="bottom-nav">
-    <a href="#" class="nav-item active">
-      <i class="fas fa-home"></i>
-      <span>Home</span>
-    </a>
-    <a href="#" class="nav-item">
-      <i class="fas fa-dollar-sign"></i>
-      <span>Payments</span>
-    </a>
-    <a href="#" class="nav-item">
-      <i class="fas fa-wallet"></i>
-      <span>Wallet</span>
-    </a>
-  </nav>
+            <div class="activity-text">
+              <p class="activity-title">harry brook</p>
+              <p class="activity-subtitle">Payment</p>
+              <p class="activity-date">22 Feb</p>
+            </div>
+          </div>
+
+          <p class="activity-amount negative">-US$200</p>
+        </div>
+      </a>
+
+      <!-- Screenshot style received transaction -->
+      <div class="activity-item">
+        <div class="activity-left">
+          <div class="store-icon-circle">
+            <i class="fa-solid fa-store"></i>
+          </div>
+
+          <div class="activity-text">
+            <p class="activity-title">TikTok Information Technologies...</p>
+            <p class="activity-subtitle">Payment received</p>
+          </div>
+        </div>
+
+        <p class="activity-amount positive">+USD 23.30</p>
+      </div>
+
+      <!-- Screenshot style received transaction -->
+      <div class="activity-item">
+        <div class="activity-left">
+          <div class="store-icon-circle">
+            <i class="fa-solid fa-store"></i>
+          </div>
+
+          <div class="activity-text">
+            <p class="activity-title">TikTok Information Technologies...</p>
+            <p class="activity-subtitle">Payment received</p>
+          </div>
+        </div>
+
+        <p class="activity-amount positive">+USD 9.94</p>
+      </div>
+
+      <!-- Screenshot style payment transaction -->
+      <div class="activity-item">
+        <div class="activity-left">
+          <div class="tiktok-logo">
+            <div class="bar bar1"></div>
+            <div class="bar bar2"></div>
+            <div class="bar bar3"></div>
+          </div>
+
+          <div class="activity-text">
+            <p class="activity-title">TikTok Inc.</p>
+            <p class="activity-subtitle">Payment</p>
+          </div>
+        </div>
+
+        <p class="activity-amount negative">-$1.61 AUD</p>
+      </div>
+
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="home.html" class="nav-item active">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <i class="fa-regular fa-credit-card"></i>
+        <span>Accounts</span>
+      </a>
+
+      <a href="sendMoney.html" class="nav-item">
+        <div class="send-request-icon">↕</div>
+        <span>Send/Request</span>
+      </a>
+
+      <a href="transaction.html" class="nav-item">
+        <i class="fa-regular fa-rectangle-list"></i>
+        <span>Activity</span>
+      </a>
+    </nav>
 
   </div>
 
- 
+  <script>
+    const transactionData = JSON.parse(localStorage.getItem('transactionData'));
 
-  <!-- Optional JavaScript -->
-  <script >
+    if (transactionData) {
+      const dynamicTransaction = document.getElementById('dynamicTransaction');
+      const recipientName = document.getElementById('recipientName');
+      const timestamp = document.getElementById('timestamp');
+      const feeText = document.getElementById('feeText');
+      const recipientAvatar = document.getElementById('recipientAvatar');
 
-const transactionData = JSON.parse(localStorage.getItem('transactionData'));
-  if (transactionData) {
-    document.getElementById('recipientName').textContent = transactionData.recipientName;
-    document.getElementById('timestamp').textContent = transactionData.timestamp;
-    document.getElementById('feeText').textContent = ` - ${transactionData.total} ${transactionData.sendCurrency}`;
-    document.getElementById('totalAmount').textContent = `- ${transactionData.total} ${transactionData.sendCurrency}`;
-    document.getElementById('recipientAvatar').textContent = transactionData.avatarText; 
-    // localStorage.removeItem('transactionData'); // Uncomment to clear data after use
-  } else {
-    console.log("No transaction data found in localStorage.");
-  }
+      dynamicTransaction.classList.remove('hidden');
+
+      if (recipientName) {
+        recipientName.textContent = transactionData.recipientName || 'Unknown recipient';
+      }
+
+      if (timestamp) {
+        timestamp.textContent = transactionData.timestamp || 'Today';
+      }
+
+      if (feeText) {
+        feeText.textContent = `-${transactionData.total} ${transactionData.sendCurrency}`;
+      }
+
+      if (recipientAvatar) {
+        if (transactionData.avatarText) {
+          recipientAvatar.textContent = transactionData.avatarText;
+        } else if (transactionData.recipientName) {
+          const words = transactionData.recipientName.trim().split(' ');
+          const initials = words.map(word => word[0]).join('').substring(0, 2);
+          recipientAvatar.textContent = initials;
+        }
+      }
+    } else {
+      console.log("No transaction data found in localStorage.");
+    }
   </script>
 </body>
 </html>
